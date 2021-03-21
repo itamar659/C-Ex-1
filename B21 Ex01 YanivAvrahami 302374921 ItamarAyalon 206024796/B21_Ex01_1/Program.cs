@@ -4,7 +4,8 @@
      {
         public static void Main()
         {
-
+            UIManager ui = new UIManager();
+            ui.LaunchUI();
         }
      }
 }
