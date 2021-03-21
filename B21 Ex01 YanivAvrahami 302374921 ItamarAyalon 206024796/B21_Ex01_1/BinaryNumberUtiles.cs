@@ -39,5 +39,20 @@
 
             return avgOfZeros;
         }
+
+        public static int GetNumberOfPower2Numbers(BinaryNumber[] i_BinaryNumberArray)
+        {
+            int totalPowerOf2Numbers = 0;
+
+            for (int i = 0; i < i_BinaryNumberArray.Length; i++)
+            {
+                if (i_BinaryNumberArray[i].IsPowerOfTwo())
+                {
+                    totalPowerOf2Numbers++;
+                }
+            }
+
+            return totalPowerOf2Numbers;
+        }
     }
 }

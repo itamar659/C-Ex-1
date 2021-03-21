@@ -20,7 +20,11 @@ namespace B21_Ex01_1
             float avgOfZeors = BinaryNumberUtiles.GetAvgOfZerosInBinaryNumbers(binaryNumbers);
             Console.WriteLine(string.Format("The average zeros: {0}", avgOfZeors));
 
+            float avgOfOnes = BinaryNumberUtiles.GetAvgOfOnesInBinaryNumbers(binaryNumbers);
+            Console.WriteLine(string.Format("The average ones: {0}", avgOfOnes));
 
+            int numberOfPower2Numbers = BinaryNumberUtiles.GetNumberOfPower2Numbers(binaryNumbers);
+            Console.WriteLine(string.Format("Number of numbers that are power of 2: {0}", numberOfPower2Numbers));
 
         }
 
