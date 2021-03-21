@@ -17,6 +17,9 @@ namespace B21_Ex01_1
                 binaryNumbers[i] = getBinaryNumbersFromUser();
             }
 
+            float avgOfZeors = getAvgOfZerosInBinaryNumbers(binaryNumbers);
+            Console.WriteLine(string.Format("The average zeros: {0}", avgOfZeors));
+
 
 
         }
@@ -43,9 +46,47 @@ namespace B21_Ex01_1
             return binaryNumber;
         }
 
-        private bool isBNumberValidInput(string i_binaryNumberStr)
+        private bool isBNumberValidInput(string i_BinaryNumberStr)
         {
-            return (i_binaryNumberStr.Length == k_NumOfDigits) && BinaryNumber.IsBinaryNumber(i_binaryNumberStr);
+            return (i_BinaryNumberStr.Length == k_NumOfDigits) && BinaryNumber.IsBinaryNumber(i_BinaryNumberStr);
+        }
+
+        private float getAvgOfZerosInBinaryNumbers(BinaryNumber[] i_BinaryNumberArray)
+        {
+            int totalZeros = 0;
+            float avgOfZeros = 0;
+
+            for (int i = 0; i < i_BinaryNumberArray.Length; i++)
+            {
+                totalZeros += i_BinaryNumberArray[i].GetNumberOfZeros();
+            }
+
+            if (i_BinaryNumberArray.Length != 0)
+            {
+                avgOfZeros = (float)totalZeros / i_BinaryNumberArray.Length;
+            }
+
+            return avgOfZeros;
+        }
+
+
+
+        private float getAvgOfOnesInBinaryNumbers(BinaryNumber[] i_BinaryNumberArray)
+        {
+            int totalZeros = 0;
+            float avgOfZeros = 0;
+
+            for (int i = 0; i < i_BinaryNumberArray.Length; i++)
+            {
+                totalZeros += i_BinaryNumberArray[i].GetNumberOfZeros();
+            }
+
+            if (i_BinaryNumberArray.Length != 0)
+            {
+                avgOfZeros = (float)totalZeros / i_BinaryNumberArray.Length;
+            }
+
+            return avgOfZeros;
         }
     }
 }
