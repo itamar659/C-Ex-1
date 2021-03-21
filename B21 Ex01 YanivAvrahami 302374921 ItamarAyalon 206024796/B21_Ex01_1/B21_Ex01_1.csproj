@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BinaryNumber.cs" />
+    <Compile Include="BinaryNumberUtiles.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="UIManager.cs" />
   </ItemGroup>
