@@ -6,7 +6,7 @@ namespace B21_Ex01_1
      {
           private string m_StrBinaryNum;
 
-          BinaryNumber(string strBinaryNum) 
+          public BinaryNumber(string strBinaryNum) 
           {
                m_StrBinaryNum = strBinaryNum;
           }
@@ -70,7 +70,7 @@ namespace B21_Ex01_1
           {
                bool isParseable;
 
-               if (isBinaryNumber(i_Str))
+               if (IsBinaryNumber(i_Str))
                {
                     o_BinaryNumber = new BinaryNumber(i_Str);
                     isParseable = true;
@@ -84,7 +84,7 @@ namespace B21_Ex01_1
                return isParseable;
           }
 
-          private static bool isBinaryNumber(string i_Str)
+          public static bool IsBinaryNumber(string i_Str)
           {
                bool res;
 

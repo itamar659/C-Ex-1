@@ -11,7 +11,7 @@ namespace B21_Ex01_1
         {
             BinaryNumber[] binaryNumbers = new BinaryNumber[k_NumOfNumbers];
 
-            Console.WriteLine("Please enter 3 number in a binary format");
+            Console.WriteLine("Please enter 3 numbers in a binary format.");
             for (int i = 0; i < k_NumOfNumbers; i++)
             {
                 binaryNumbers[i] = getBinaryNumbersFromUser();
@@ -23,12 +23,20 @@ namespace B21_Ex01_1
 
         private BinaryNumber getBinaryNumbersFromUser()
         {
+            bool isValidInput;
             string binaryNumberStr;
+
+            Console.WriteLine("Please enter a binary number with 7 digits:");
 
             do
             {
                 binaryNumberStr = Console.ReadLine();
-            } while (!isBNumberValidInput(binaryNumberStr));
+                isValidInput = isBNumberValidInput(binaryNumberStr);
+                if (!isValidInput)
+                {
+                    Console.WriteLine("Something went wrong. Please try again.");
+                }
+            } while (!isValidInput);
 
             BinaryNumber binaryNumber = new BinaryNumber(binaryNumberStr);
 
