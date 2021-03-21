@@ -7,5 +7,9 @@ namespace B21_Ex01_1
      class BinaryNumber
      {
           private int m_Length = 7;
+        public string GetNumberOfZeroesOnes()
+        {
+            return string.Empty;
+        }
      }
 }
