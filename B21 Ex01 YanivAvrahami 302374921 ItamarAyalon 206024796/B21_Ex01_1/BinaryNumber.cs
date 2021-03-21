@@ -4,6 +4,12 @@ namespace B21_Ex01_1
 {
      public class BinaryNumber
      {
+          public enum eBinaryDigit
+          {
+               One,
+               Zero
+          }
+
           private string m_StrBinaryNum;
 
           public BinaryNumber(string strBinaryNum) 
@@ -26,14 +32,24 @@ namespace B21_Ex01_1
                return numOfOccurrences;
           }
      
-          public int GetNumberOfZeros()
+          public int GetNumberOfBinaryDigitOccurrences(eBinaryDigit digit)
           {
-               return GetNumOfCharOccurrences('0');
-          }
+               int occurrences = 0;
+               char charDigit = '0';
 
-          public int GetNumberOfOnes()
-          {
-               return GetNumOfCharOccurrences('1');
+               if (digit == eBinaryDigit.One)
+               {
+                    charDigit = '1';
+               }
+
+               if (digit == eBinaryDigit.Zero) 
+               {
+                    charDigit = '0';
+               }
+
+               occurrences = GetNumOfCharOccurrences(charDigit);
+               
+               return occurrences;
           }
 
           public bool IsPowerOfTwo() 
