@@ -41,9 +41,10 @@ namespace B21_Ex01_1
                return numOfOnes;
           }
 
-         /* public bool IsPowerOfTwo() 
+          public bool IsPowerOfTwo() 
           {
                bool seenOneSetDigit = false;
+               bool isPowerOfTwo = false;
 
                for (int i = 0; i < m_StrBinaryNum.Length; i++)
                {
@@ -51,16 +52,17 @@ namespace B21_Ex01_1
                     {
                          if (seenOneSetDigit)
                          {
-                              
+                              isPowerOfTwo = false;
+                              break;
                          }
-                         seenOneSetDigit = true;
+                         else
+                         {
+                              seenOneSetDigit = true;
+                         }
                     }
-
-
-                    
                }
           }
-*/
+
           public static BinaryNumber Parse(string i_Str)
           {
                return new BinaryNumber(i_Str);
