@@ -4,7 +4,11 @@ using System.Text;
 
 namespace B21_Ex01_1
 {
-     class BinaryNumber
-     {
+    class BinaryNumber
+    {
+        public string GetNumberOfZeroesOnes()
+        {
+            return string.Empty;
+        }
      }
 }
