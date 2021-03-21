@@ -8,6 +8,7 @@ namespace B21_Ex01_1
           {
                Console.WriteLine("Hello!");
                Console.WriteLine("Hello to you too!!");
+               Console.ReadLine();
         }
      }
 }
