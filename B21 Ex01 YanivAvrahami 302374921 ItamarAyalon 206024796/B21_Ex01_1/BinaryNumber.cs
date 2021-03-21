@@ -10,35 +10,30 @@ namespace B21_Ex01_1
           {
                m_StrBinaryNum = strBinaryNum;
           }
-          
-          public int GetNumberOfZeros()
+
+          private int GetNumOfCharOccurrences(char ch) 
           {
-               int numOfZeros = 0;
+               int numOfOccurrences = 0;
 
                for (int i = 0; i < m_StrBinaryNum.Length; i++)
                {
-                    if (m_StrBinaryNum[i] == '0')
+                    if (m_StrBinaryNum[i] == ch)
                     {
-                         numOfZeros++;
+                         numOfOccurrences++;
                     }
                }
 
-               return numOfZeros;
+               return numOfOccurrences;
+          }
+     
+          public int GetNumberOfZeros()
+          {
+               return GetNumOfCharOccurrences('0');
           }
 
           public int GetNumberOfOnes()
           {
-               int numOfOnes = 0;
-
-               for (int i = 0; i < m_StrBinaryNum.Length; i++)
-               {
-                    if (m_StrBinaryNum[i] == '1')
-                    {
-                         numOfOnes++;
-                    }
-               }
-
-               return numOfOnes;
+               return GetNumOfCharOccurrences('1');
           }
 
           public bool IsPowerOfTwo() 
@@ -57,10 +52,13 @@ namespace B21_Ex01_1
                          }
                          else
                          {
+                              isPowerOfTwo = true;
                               seenOneSetDigit = true;
                          }
                     }
                }
+
+               return isPowerOfTwo;
           }
 
           public static BinaryNumber Parse(string i_Str)
