@@ -7,6 +7,7 @@ namespace B21_Ex01_1
           public static void Main() 
           {
                Console.WriteLine("Hello!");
-          }
+               Console.WriteLine("Hello to you too!!");
+        }
      }
 }
