@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.Win32;
 
 namespace B21_Ex01_6
 {
@@ -28,7 +27,7 @@ namespace B21_Ex01_6
           private static void printStatisticsOnNumber(int i_Number)
           {
                string numString = i_Number.ToString();
-
+               
                string msg = String.Format(
 @"Biggest Digit in {0} is: {1}
 Smallest Digit in {2} is: {3} 

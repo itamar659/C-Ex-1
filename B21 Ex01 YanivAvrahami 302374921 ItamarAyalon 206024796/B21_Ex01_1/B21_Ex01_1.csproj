@@ -35,11 +35,7 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="BinaryNumber.cs" />
-    <Compile Include="BinaryNumberUtiles.cs" />
-    <Compile Include="NumberUtiles.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="UIManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
