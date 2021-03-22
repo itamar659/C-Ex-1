@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace B21_Ex01_1
+﻿namespace B21_Ex01_1
 {
      public class BinaryNumber
      {
@@ -12,18 +10,18 @@ namespace B21_Ex01_1
 
           private string m_StrBinaryNum;
 
-          public BinaryNumber(string strBinaryNum) 
+          public BinaryNumber(string i_strBinaryNum) 
           {
-               m_StrBinaryNum = strBinaryNum;
+               m_StrBinaryNum = i_strBinaryNum;
           }
 
-          private int GetNumOfCharOccurrences(char ch) 
+          private int GetNumOfCharOccurrences(char i_ch) 
           {
                int numOfOccurrences = 0;
 
                for (int i = 0; i < m_StrBinaryNum.Length; i++)
                {
-                    if (m_StrBinaryNum[i] == ch)
+                    if (m_StrBinaryNum[i] == i_ch)
                     {
                          numOfOccurrences++;
                     }
@@ -32,17 +30,17 @@ namespace B21_Ex01_1
                return numOfOccurrences;
           }
      
-          public int GetNumberOfBinaryDigitOccurrences(eBinaryDigit digit)
+          public int GetNumberOfBinaryDigitOccurrences(eBinaryDigit i_digit)
           {
                int occurrences = 0;
                char charDigit = '0';
 
-               if (digit == eBinaryDigit.One)
+               if (i_digit == eBinaryDigit.One)
                {
                     charDigit = '1';
                }
 
-               if (digit == eBinaryDigit.Zero) 
+               if (i_digit == eBinaryDigit.Zero) 
                {
                     charDigit = '0';
                }
