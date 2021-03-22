@@ -1,4 +1,6 @@
-﻿namespace B21_Ex01_1
+﻿using System;
+
+namespace B21_Ex01_1
 {
     public class BinaryNumberUtiles
     {
@@ -58,6 +60,36 @@
             }
 
             return numOfDecendingOrderNumbers;
+        }
+
+        public static BinaryNumber GetMax(BinaryNumber[] i_BinaryNumberArray)
+        {
+            BinaryNumber currentMax = i_BinaryNumberArray[0];
+
+            for (int i = 1; i < i_BinaryNumberArray.Length; i++)
+            {
+                if (currentMax.ToDecimalNumber() < i_BinaryNumberArray[i].ToDecimalNumber())
+                {
+                    currentMax = i_BinaryNumberArray[i];
+                }
+            }
+
+            return currentMax;
+        }
+
+        public static BinaryNumber GetMin(BinaryNumber[] i_BinaryNumberArray)
+        {
+            BinaryNumber currentMin = i_BinaryNumberArray[0];
+
+            for (int i = 1; i < i_BinaryNumberArray.Length; i++)
+            {
+                if (currentMin.ToDecimalNumber() > i_BinaryNumberArray[i].ToDecimalNumber())
+                {
+                    currentMin = i_BinaryNumberArray[i];
+                }
+            }
+
+            return currentMin;
         }
     }
 }

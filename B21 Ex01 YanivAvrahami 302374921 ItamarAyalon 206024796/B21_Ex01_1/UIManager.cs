@@ -35,6 +35,11 @@ namespace B21_Ex01_1
             int numOfNumbersPresentedInDecendingOrder = BinaryNumberUtiles.GetNumberOfBinaryNumberPresentedInDecendingOrder(binaryNumbers);
             Console.WriteLine(string.Format("Number of numbers that their digits represent decending order: {0}", numOfNumbersPresentedInDecendingOrder));
 
+            BinaryNumber maxBinaryNumber = BinaryNumberUtiles.GetMax(binaryNumbers);
+            BinaryNumber minBinaryNumber = BinaryNumberUtiles.GetMin(binaryNumbers);
+            Console.WriteLine(string.Format("Max is: {0}, Min is: {1}", maxBinaryNumber, minBinaryNumber));
+
+
         }
 
         private BinaryNumber getBinaryNumbersFromUser()
