@@ -12,6 +12,7 @@ namespace B21_Ex01_3
             if (int.TryParse(hourglassSizeStr, out int hourglassSize))
             {
                 string myHourglass = B21_Ex01_2.Program.GetHourGlass(hourglassSize);
+
                 Console.WriteLine(myHourglass);
             }
             else

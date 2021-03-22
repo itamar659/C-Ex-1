@@ -13,6 +13,7 @@ namespace B21_Ex01_2
         public static string GetHourGlass(int i_Size)
         {
             StringBuilder outputStrBuilder = new StringBuilder();
+
             if (i_Size <= 0)
             {
                 outputStrBuilder.Append("Size has to be positive number.");
@@ -29,6 +30,7 @@ namespace B21_Ex01_2
         private static string getHourGlassRec(uint i_Size, uint i_StartFrom = 0)
         {
             StringBuilder hourGlassStr = new StringBuilder();
+
             if (i_Size <= 2)
             {
                 string lineOfSizeStars = createNStars(i_Size, i_StartFrom);
