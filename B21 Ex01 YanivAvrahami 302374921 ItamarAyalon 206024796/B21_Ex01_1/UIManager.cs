@@ -17,14 +17,23 @@ namespace B21_Ex01_1
                 binaryNumbers[i] = getBinaryNumbersFromUser();
             }
 
+            Console.Write("The numbers you entered in decimal: ");
+            for (int i = 0; i < k_NumOfNumbers; i++)
+            {
+                Console.Write(binaryNumbers[i].ToDecimalNumber().ToString()); // TODO: Add ToDecimalNumber method in binaryNumber
+            }
+
             float avgOfZeors = BinaryNumberUtiles.GetAvgOfZerosInBinaryNumbers(binaryNumbers);
             Console.WriteLine(string.Format("The average zeros: {0}", avgOfZeors));
 
             float avgOfOnes = BinaryNumberUtiles.GetAvgOfOnesInBinaryNumbers(binaryNumbers);
             Console.WriteLine(string.Format("The average ones: {0}", avgOfOnes));
 
-            int numberOfPower2Numbers = BinaryNumberUtiles.GetNumberOfPower2Numbers(binaryNumbers);
-            Console.WriteLine(string.Format("Number of numbers that are power of 2: {0}", numberOfPower2Numbers));
+            int numOfPower2Numbers = BinaryNumberUtiles.GetNumberOfPower2Numbers(binaryNumbers);
+            Console.WriteLine(string.Format("Number of numbers that are power of 2: {0}", numOfPower2Numbers));
+
+            int numOfNumbersPresentedInDecendingOrder = BinaryNumberUtiles.GetNumberOfBinaryNumberPresentedInDecendingOrder(binaryNumbers);
+            Console.WriteLine(string.Format("Number of numbers that their digits represent decending order: {0}", numOfNumbersPresentedInDecendingOrder));
 
         }
 

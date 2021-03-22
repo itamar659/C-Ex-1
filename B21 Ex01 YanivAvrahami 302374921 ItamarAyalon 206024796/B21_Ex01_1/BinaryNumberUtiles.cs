@@ -44,5 +44,20 @@
 
             return totalPowerOf2Numbers;
         }
+
+        public static int GetNumberOfBinaryNumberPresentedInDecendingOrder(BinaryNumber[] i_BinaryNumberArray)
+        {
+            int numOfDecendingOrderNumbers = 0;
+
+            foreach (BinaryNumber currentBinaryNumber in i_BinaryNumberArray)
+            {
+                if (NumberUtiles.IsNumberDigitsInDecendingOrder(currentBinaryNumber.ToDecimalNumber()) == true)
+                {
+                    numOfDecendingOrderNumbers++;
+                }
+            }
+
+            return numOfDecendingOrderNumbers;
+        }
     }
 }
