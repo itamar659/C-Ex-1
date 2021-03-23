@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace B21_Ex01_1
 {
@@ -6,332 +7,102 @@ namespace B21_Ex01_1
      {
           public static void Main()
           {
-               const int k_NumOfNumbersToRequest = 3;
-               
-               string[] strBinaryNumbers = new string[k_NumOfNumbersToRequest];
-
-               // get 3 binary numbers from the user
-               Console.WriteLine(@"Please enter {0} numbers in a binary format:", k_NumOfNumbersToRequest);
-               for (int i = 0; i < k_NumOfNumbers; i++)
-               {
-                    strBinaryNumbers[i] = Console.ReadLine();
-               }
-
-               // convert the binary numbers to decimal numbers
-               
-               // print the numbers in decimal form
-
-               // print statistics about the input:
-               // sum all the zeros that was enters
-
-          }
-          
-          private const uint k_NumOfNumbers = 3;
-          private const uint k_NumOfDigits = 7;
-
-          public void LaunchUI()
-          {
-               
-
-              
-
-               Console.Write("The numbers you entered in decimal: ");
-               for (int i = 0; i < k_NumOfNumbers; i++)
-               {
-                    Console.Write(binaryNumbers[i].ToDecimalNumber().ToString()); // TODO: Add ToDecimalNumber method in binaryNumber
-               }
-
-               float avgOfZeors = BinaryNumberUtiles.GetAvgOfZerosInBinaryNumbers(binaryNumbers);
-               Console.WriteLine(string.Format("The average zeros: {0}", avgOfZeors));
-
-               float avgOfOnes = BinaryNumberUtiles.GetAvgOfOnesInBinaryNumbers(binaryNumbers);
-               Console.WriteLine(string.Format("The average ones: {0}", avgOfOnes));
-
-               int numOfPower2Numbers = BinaryNumberUtiles.GetNumberOfPower2Numbers(binaryNumbers);
-               Console.WriteLine(string.Format("Number of numbers that are power of 2: {0}", numOfPower2Numbers));
-
-               int numOfNumbersPresentedInDecendingOrder = BinaryNumberUtiles.GetNumberOfBinaryNumberPresentedInDecendingOrder(binaryNumbers);
-               Console.WriteLine(string.Format("Number of numbers that their digits represent decending order: {0}", numOfNumbersPresentedInDecendingOrder));
-
-               BinaryNumber maxBinaryNumber = BinaryNumberUtiles.GetMax(binaryNumbers);
-               BinaryNumber minBinaryNumber = BinaryNumberUtiles.GetMin(binaryNumbers);
-               Console.WriteLine(string.Format("Max is: {0}, Min is: {1}", maxBinaryNumber, minBinaryNumber));
-
-
-          }
-
-          private BinaryNumber getBinaryNumbersFromUser()
-          {
-               bool isValidInput;
-               string binaryNumberStr;
+               const int k_NumOfRequests = 3;
 
                Console.WriteLine("Please enter a binary number with 7 digits:");
+               string[] binaryArr = getNBinaryNumbersFromUser(k_NumOfRequests);
 
-               do
-               {
-                    binaryNumberStr = Console.ReadLine();
-                    isValidInput = isBNumberValidInput(binaryNumberStr);
-                    if (!isValidInput)
-                    {
-                         Console.WriteLine("Something went wrong. Please try again.");
-                    }
-               } while (!isValidInput);
+               Console.Write("The numbers you entered in decimal: ");
+               printBinaryAsDecimalNumbers(binaryArr);
 
-               BinaryNumber binaryNumber = new BinaryNumber(binaryNumberStr);
+               printStatisticsOnBinaryNumbers(binaryArr);
 
-               return binaryNumber;
+               Console.WriteLine();
+
+               printExamples();
           }
 
-          private bool isBNumberValidInput(string i_BinaryNumberStr)
+          private static void printBinaryAsDecimalNumbers(string[] i_BinaryNumbers)
           {
-               return (i_BinaryNumberStr.Length == k_NumOfDigits) && BinaryNumber.IsBinaryNumber(i_BinaryNumberStr);
+               int[] decimalArr = parseToDecimalArr(i_BinaryNumbers);
+               printDecimalNumbers(decimalArr);
           }
 
-
-
-
-
-
-
-
-
-
-          public static bool IsNumberDigitsInDescendingOrder(int i_Number)
+          private static void printExamples()
           {
-               bool isDescendingOrder;
+               string[] binaryArr = new string[]{ "1111011", "1101110", "1000000" };
+               Console.WriteLine("Example 1:");
+               printExample(binaryArr);
 
-               if(i_Number < 10)
+               Console.WriteLine();
+
+               binaryArr = new string[]{ "0010111", "0110000", "0011100" };
+               Console.WriteLine("Example 2:");
+               printExample(binaryArr);
+
+               Console.WriteLine();
+
+               binaryArr = new string[]{ "1011111", "1101111", "0110011" };
+               Console.WriteLine("Example 3:");
+               printExample(binaryArr);
+          }
+
+          private static void printExample(string[] i_BinaryNumbers)
+          {
+               Console.Write("The binary numbers in decimal: ");
+               printBinaryAsDecimalNumbers(i_BinaryNumbers);
+
+               printStatisticsOnBinaryNumbers(i_BinaryNumbers);
+          }
+
+          private static string[] getNBinaryNumbersFromUser(int i_NumOfNumbersToRequest)
+          {
+               string[] binaryNumberArr = new string[i_NumOfNumbersToRequest];
+
+               for (int i = 0; i < i_NumOfNumbersToRequest; i++)
                {
-                    isDescendingOrder = true;
+                    binaryNumberArr[i] = getBinaryNumberFromUser();
                }
-               else
-               {
-                    int lastValue = i_Number % 10;
-                    i_Number /= 10;
 
-                    if(i_Number % 10 < lastValue)
+               return binaryNumberArr;
+          }
+          
+          
+          private static string getBinaryNumberFromUser()
+          {
+               bool isValidBinaryNumber = false;
+               string binaryNumber = "";
+
+               while(!isValidBinaryNumber)
+               {
+                    string userInput = Console.ReadLine();
+                    isValidBinaryNumber = isValidBinaryNumberInput(userInput);
+                    if (isValidBinaryNumberInput(userInput))
                     {
-                         isDescendingOrder = IsNumberDigitsInDescendingOrder(i_Number);
+                         binaryNumber = userInput;
+                         isValidBinaryNumber = true;
                     }
                     else
                     {
-                         isDescendingOrder = false;
+                         Console.WriteLine("Something went wrong. Please try again.");
                     }
                }
-
-               return isDescendingOrder;
+               
+               return binaryNumber;
           }
-
-
-
-          public static float GetAvgOfZerosInBinaryNumbers(BinaryNumber[] i_BinaryNumberArray)
+          
+          private static bool isValidBinaryNumberInput(string i_BinaryNumberStr)
           {
-               return getAvgOfOnesZerosInBinaryNumbers(i_BinaryNumberArray, BinaryNumber.eBinaryDigit.Zero);
+               const uint k_NumOfDigits = 7;
+               bool isValidInput = (i_BinaryNumberStr.Length == k_NumOfDigits) && IsBinaryNumber(i_BinaryNumberStr);
+               return isValidInput;
           }
 
-          public static float GetAvgOfOnesInBinaryNumbers(BinaryNumber[] i_BinaryNumberArray)
+          private static bool IsBinaryNumber(string i_Str)
           {
-               return getAvgOfOnesZerosInBinaryNumbers(i_BinaryNumberArray, BinaryNumber.eBinaryDigit.One);
+               return isOnlyOnesAndZeros(i_Str) && i_Str.Length == 7;
           }
-
-          private static float getAvgOfOnesZerosInBinaryNumbers(BinaryNumber[] i_BinaryNumberArray, BinaryNumber.eBinaryDigit i_BinaryDigit)
-          {
-               int totalZeros = 0;
-               float avgOfZeros = 0;
-
-               for (int i = 0; i < i_BinaryNumberArray.Length; i++)
-               {
-                    totalZeros += i_BinaryNumberArray[i].GetNumberOfBinaryDigitOccurrences(i_BinaryDigit);
-               }
-
-               if (i_BinaryNumberArray.Length != 0)
-               {
-                    avgOfZeros = (float)totalZeros / i_BinaryNumberArray.Length;
-               }
-
-               return avgOfZeros;
-          }
-
-          public static int GetNumberOfPower2Numbers(BinaryNumber[] i_BinaryNumberArray)
-          {
-               int totalPowerOf2Numbers = 0;
-
-               for (int i = 0; i < i_BinaryNumberArray.Length; i++)
-               {
-                    if (i_BinaryNumberArray[i].IsPowerOfTwo())
-                    {
-                         totalPowerOf2Numbers++;
-                    }
-               }
-
-               return totalPowerOf2Numbers;
-          }
-
-          public static int GetNumberOfBinaryNumberPresentedInDecendingOrder(BinaryNumber[] i_BinaryNumberArray)
-          {
-               int numOfDecendingOrderNumbers = 0;
-
-               foreach (BinaryNumber currentBinaryNumber in i_BinaryNumberArray)
-               {
-                    if (NumberUtiles.IsNumberDigitsInDescendingOrder(currentBinaryNumber.ToDecimalNumber()) == true)
-                    {
-                         numOfDecendingOrderNumbers++;
-                    }
-               }
-
-               return numOfDecendingOrderNumbers;
-          }
-
-          public static BinaryNumber GetMax(BinaryNumber[] i_BinaryNumberArray)
-          {
-               BinaryNumber currentMax = i_BinaryNumberArray[0];
-
-               for (int i = 1; i < i_BinaryNumberArray.Length; i++)
-               {
-                    if (currentMax.ToDecimalNumber() < i_BinaryNumberArray[i].ToDecimalNumber())
-                    {
-                         currentMax = i_BinaryNumberArray[i];
-                    }
-               }
-
-               return currentMax;
-          }
-
-          public static BinaryNumber GetMin(BinaryNumber[] i_BinaryNumberArray)
-          {
-               BinaryNumber currentMin = i_BinaryNumberArray[0];
-
-               for (int i = 1; i < i_BinaryNumberArray.Length; i++)
-               {
-                    if (currentMin.ToDecimalNumber() > i_BinaryNumberArray[i].ToDecimalNumber())
-                    {
-                         currentMin = i_BinaryNumberArray[i];
-                    }
-               }
-
-               return currentMin;
-          }
-
-
-
-
-
-
-
-
-
-          public enum eBinaryDigit
-          {
-               One,
-               Zero
-          }
-
-          private string m_StrBinaryNum;
-
-          public BinaryNumber(string i_strBinaryNum)
-          {
-               m_StrBinaryNum = i_strBinaryNum;
-          }
-
-          private int GetNumOfCharOccurrences(char i_ch)
-          {
-               int numOfOccurrences = 0;
-
-               for (int i = 0; i < m_StrBinaryNum.Length; i++)
-               {
-                    if (m_StrBinaryNum[i] == i_ch)
-                    {
-                         numOfOccurrences++;
-                    }
-               }
-
-               return numOfOccurrences;
-          }
-
-          public int GetNumberOfBinaryDigitOccurrences(eBinaryDigit i_digit)
-          {
-               int occurrences = 0;
-               char charDigit = '0';
-
-               if (i_digit == eBinaryDigit.One)
-               {
-                    charDigit = '1';
-               }
-
-               if (i_digit == eBinaryDigit.Zero)
-               {
-                    charDigit = '0';
-               }
-
-               occurrences = GetNumOfCharOccurrences(charDigit);
-
-               return occurrences;
-          }
-
-          public bool IsPowerOfTwo()
-          {
-               bool seenOneSetDigit = false;
-               bool isPowerOfTwo = false;
-
-               for (int i = 0; i < m_StrBinaryNum.Length; i++)
-               {
-                    if (m_StrBinaryNum[i] == '1')
-                    {
-                         if (seenOneSetDigit)
-                         {
-                              isPowerOfTwo = false;
-                              break;
-                         }
-                         else
-                         {
-                              isPowerOfTwo = true;
-                              seenOneSetDigit = true;
-                         }
-                    }
-               }
-
-               return isPowerOfTwo;
-          }
-
-          public static BinaryNumber Parse(string i_Str)
-          {
-               return new BinaryNumber(i_Str);
-          }
-
-          public static bool TryParse(string i_Str, out BinaryNumber o_BinaryNumber)
-          {
-               bool isParseable;
-
-               if (IsBinaryNumber(i_Str))
-               {
-                    o_BinaryNumber = new BinaryNumber(i_Str);
-                    isParseable = true;
-               }
-               else
-               {
-                    o_BinaryNumber = null;
-                    isParseable = false;
-               }
-
-               return isParseable;
-          }
-
-          public static bool IsBinaryNumber(string i_Str)
-          {
-               bool res;
-
-               if (isOnlyOnesAndZeros(i_Str))
-               {
-                    res = true;
-               }
-               else
-               {
-                    res = false;
-               }
-
-               return res;
-          }
-
+          
           private static bool isOnlyOnesAndZeros(string i_Str)
           {
                bool res = true;
@@ -350,12 +121,252 @@ namespace B21_Ex01_1
                return res;
           }
 
+          private static void printDecimalNumbers(int[] i_DecimalNumberArr)
+          {
+               StringBuilder msg = new StringBuilder();
 
+               foreach(int decimalNumber in i_DecimalNumberArr)
+               {
+                    msg.Append(decimalNumber);
+                    msg.Append(' ');
+               }
 
+               Console.WriteLine(msg);
+          }
 
+          private static int[] parseToDecimalArr(string[] i_BinaryNumberArr)
+          {
+               int[] decimalArr = new int[i_BinaryNumberArr.Length];
 
+               for(int i = 0; i < i_BinaryNumberArr.Length; i++)
+               {
+                    decimalArr[i] = convertBinaryToDecimal(i_BinaryNumberArr[i]);
+               }
 
+               return decimalArr;
+          }
 
+          private static int convertBinaryToDecimal(string i_S)
+          {
+               int sum = 0;
+               for (int i = 0; i < i_S.Length; i++)
+               {
+                    sum += getDigitFromBinary(i_S, i_S.Length - i - 1) * (int)Math.Pow(2, i);
+               }
 
+               return sum;
+          }
+
+          private static int getDigitFromBinary(string i_S, int i_I)
+          {
+               int binaryDigit = i_S[i_I] - '0';
+
+               return binaryDigit;
+          }
+
+          private static void printStatisticsOnBinaryNumbers(string[] i_BinaryNumberArr)
+          {
+               float avgOfZeros = getAvgOfZerosInBinaryNumbers(i_BinaryNumberArr);
+               float avgOfOnes = getAvgOfOnesInBinaryNumbers(i_BinaryNumberArr);
+               int numOfPower2Numbers = getNumberOfPower2Numbers(i_BinaryNumberArr);
+               int numOfNumbersPresentedInDescendingOrder = getNumberOfBinaryNumberPresentedInDecendingOrder(i_BinaryNumberArr);
+               string maxBinaryNumber = getMax(i_BinaryNumberArr);
+               string minBinaryNumber = getMin(i_BinaryNumberArr);
+
+               string msg = string.Format(
+@"The average zeros: {0}
+The average ones: {1}
+Number of numbers that are power of 2: {2}
+Number of numbers that their digits represent descending order: {3}
+Max is: {4}, Min is: {5}",
+                    avgOfZeros,
+                    avgOfOnes,
+                    numOfPower2Numbers,
+                    numOfNumbersPresentedInDescendingOrder,
+                    maxBinaryNumber,
+                    minBinaryNumber);
+
+               Console.WriteLine(msg);
+          }
+          
+          public enum eBinaryDigit
+          {
+               One,
+               Zero
+          }
+
+          private static int getNumberOfPower2Numbers(string[] i_BinaryNumberArray)
+          {
+               int totalPowerOf2Numbers = 0;
+
+               for (int i = 0; i < i_BinaryNumberArray.Length; i++)
+               {
+                    if (isPowerOfTwo(i_BinaryNumberArray[i]))
+                    {
+                         totalPowerOf2Numbers++;
+                    }
+               }
+
+               return totalPowerOf2Numbers;
+          }
+          
+          private static bool isPowerOfTwo(string i_BinaryNumber)
+          {
+               bool seenOneSetDigit = false;
+               bool isPowerOfTwo = false;
+
+               for (int i = 0; i < i_BinaryNumber.Length; i++)
+               {
+                    if (i_BinaryNumber[i] == '1')
+                    {
+                         if (seenOneSetDigit)
+                         {
+                              isPowerOfTwo = false;
+                              break;
+                         }
+                         else
+                         {
+                              isPowerOfTwo = true;
+                              seenOneSetDigit = true;
+                         }
+                    }
+               }
+
+               return isPowerOfTwo;
+          }
+
+          private static string getMax(string[] i_BinaryNumberArray)
+          {
+               string currentMax = i_BinaryNumberArray[0];
+
+               for (int i = 1; i < i_BinaryNumberArray.Length; i++)
+               {
+                    if (convertBinaryToDecimal(currentMax) < convertBinaryToDecimal(i_BinaryNumberArray[i]))
+                    {
+                         currentMax = i_BinaryNumberArray[i];
+                    }
+               }
+
+               return currentMax;
+          }
+
+          private static string getMin(string[] i_BinaryNumberArray)
+          {
+               string currentMin = i_BinaryNumberArray[0];
+
+               for (int i = 1; i < i_BinaryNumberArray.Length; i++)
+               {
+                    if (convertBinaryToDecimal(currentMin) > convertBinaryToDecimal(i_BinaryNumberArray[i]))
+                    {
+                         currentMin = i_BinaryNumberArray[i];
+                    }
+               }
+
+               return currentMin;
+          }
+
+          private static float getAvgOfZerosInBinaryNumbers(string[] i_BinaryNumberArray)
+          {
+               return getAvgOfOnesZerosInBinaryNumbers(i_BinaryNumberArray, eBinaryDigit.Zero);
+          }
+
+          private static float getAvgOfOnesInBinaryNumbers(string[] i_BinaryNumberArray)
+          {
+               return getAvgOfOnesZerosInBinaryNumbers(i_BinaryNumberArray, eBinaryDigit.One);
+          }
+
+          private static float getAvgOfOnesZerosInBinaryNumbers(string[] i_BinaryNumberArray, eBinaryDigit i_BinaryDigit)
+          {
+               int totalZeros = 0;
+               float avgOfZeros = 0;
+
+               for (int i = 0; i < i_BinaryNumberArray.Length; i++)
+               {
+                    totalZeros += getNumberOfBinaryDigitOccurrences(i_BinaryNumberArray[i], i_BinaryDigit);
+               }
+
+               if (i_BinaryNumberArray.Length != 0)
+               {
+                    avgOfZeros = (float)totalZeros / i_BinaryNumberArray.Length;
+               }
+
+               return avgOfZeros;
+          }
+
+          private static int getNumberOfBinaryNumberPresentedInDecendingOrder(string[] i_BinaryNumberArray)
+          {
+               int numOfDescendingOrderNumbers = 0;
+
+               foreach (string currentBinaryNumber in i_BinaryNumberArray)
+               {
+                    if(isNumberDigitsInDescendingOrder(convertBinaryToDecimal(currentBinaryNumber)))
+                    {
+                         numOfDescendingOrderNumbers++;
+                    }
+               }
+
+               return numOfDescendingOrderNumbers;
+          }
+
+          private static int getNumberOfBinaryDigitOccurrences(string i_BinaryNumber, eBinaryDigit i_BinaryDigit)
+          {
+               int occurrences = 0;
+               char binaryDigitAsChar = '0';
+
+               if (i_BinaryDigit == eBinaryDigit.One)
+               {
+                    binaryDigitAsChar = '1';
+               }
+
+               if (i_BinaryDigit == eBinaryDigit.Zero)
+               {
+                    binaryDigitAsChar = '0';
+               }
+
+               occurrences = getNumOfCharOccurrences(i_BinaryNumber, binaryDigitAsChar);
+
+               return occurrences;
+          }
+
+          private static int getNumOfCharOccurrences(string i_BinaryNumber, char i_Char)
+          {
+               int numOfOccurrences = 0;
+
+               for (int i = 0; i < i_BinaryNumber.Length; i++)
+               {
+                    if (i_BinaryNumber[i] == i_Char)
+                    {
+                         numOfOccurrences++;
+                    }
+               }
+
+               return numOfOccurrences;
+          }
+
+          private static bool isNumberDigitsInDescendingOrder(int i_Number)
+          {
+               bool isDescendingOrder;
+
+               if (i_Number < 10)
+               {
+                    isDescendingOrder = true;
+               }
+               else
+               {
+                    int lastValue = i_Number % 10;
+                    i_Number /= 10;
+
+                    if (i_Number % 10 < lastValue)
+                    {
+                         isDescendingOrder = isNumberDigitsInDescendingOrder(i_Number);
+                    }
+                    else
+                    {
+                         isDescendingOrder = false;
+                    }
+               }
+
+               return isDescendingOrder;
+          }
      }
 }
