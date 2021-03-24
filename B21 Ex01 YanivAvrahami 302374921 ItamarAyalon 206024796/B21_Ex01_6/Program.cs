@@ -130,14 +130,5 @@ Number of digits that are bigger than {6} is: {7}",
 
                return biggestDigit;
           }
-
-          private static bool isStringContainsOnlyDigits(string str)
-          {
-               bool hasOnlyDigits = false;
-               
-               hasOnlyDigits = int.TryParse(str, out int temp);
-
-               return hasOnlyDigits;
-          }
      }
 }
