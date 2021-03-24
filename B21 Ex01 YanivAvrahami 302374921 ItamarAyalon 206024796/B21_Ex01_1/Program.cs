@@ -37,7 +37,6 @@ namespace B21_Ex01_1
             return binaryNumberArr;
         }
 
-
         private static string getBinaryNumberFromUser()
         {
             const bool v_BinaryNumberValid = true;
@@ -74,31 +73,31 @@ namespace B21_Ex01_1
         private static bool isOnlyOnesAndZeros(string i_Str)
         {
             const bool v_isContainOnesZeros = true;
-            bool res = v_isContainOnesZeros;
+            bool isValidBinaryNumber = v_isContainOnesZeros;
 
-            foreach (char ch in i_Str)
+            foreach (char currentCharInString in i_Str)
             {
-                if (ch != '0' && ch != '1')
+                if (currentCharInString != '0' && currentCharInString != '1')
                 {
-                    res = !v_isContainOnesZeros;
+                    isValidBinaryNumber = !v_isContainOnesZeros;
                     break;
                 }
             }
 
-            return res;
+            return isValidBinaryNumber;
         }
 
         private static void printDecimalNumbers(int[] i_DecimalNumberArr)
         {
-            StringBuilder msg = new StringBuilder();
+            StringBuilder decimalNumbersStrBuilder = new StringBuilder();
 
             foreach (int decimalNumber in i_DecimalNumberArr)
             {
-                msg.Append(decimalNumber);
-                msg.Append(' ');
+                decimalNumbersStrBuilder.Append(decimalNumber);
+                decimalNumbersStrBuilder.Append(' ');
             }
 
-            Console.WriteLine(msg);
+            Console.WriteLine(decimalNumbersStrBuilder);
         }
 
         private static int[] parseToDecimalArr(string[] i_BinaryNumberArr)
@@ -113,21 +112,21 @@ namespace B21_Ex01_1
             return decimalArr;
         }
 
-        private static int convertBinaryToDecimal(string i_S)
+        private static int convertBinaryToDecimal(string i_BinerNumber)
         {
-            int sum = 0;
+            int decimalNumber = 0;
 
-            for (int i = 0; i < i_S.Length; i++)
+            for (int i = 0; i < i_BinerNumber.Length; i++)
             {
-                sum += getDigitFromBinary(i_S, i_S.Length - i - 1) * (int)Math.Pow(2, i);
+                decimalNumber += getDigitFromBinary(i_BinerNumber, i_BinerNumber.Length - i - 1) * (int)Math.Pow(2, i);
             }
 
-            return sum;
+            return decimalNumber;
         }
 
-        private static int getDigitFromBinary(string i_S, int i_I)
+        private static int getDigitFromBinary(string i_BinerNumber, int i_IndexInBinaryNumber)
         {
-            int binaryDigit = i_S[i_I] - '0';
+            int binaryDigit = i_BinerNumber[i_IndexInBinaryNumber] - '0';
 
             return binaryDigit;
         }
@@ -141,7 +140,7 @@ namespace B21_Ex01_1
             int maxBinaryNumber = getMax(parseToDecimalArr(i_BinaryNumberArr));
             int minBinaryNumber = getMin(parseToDecimalArr(i_BinaryNumberArr));
 
-            string msg = string.Format(
+            string statisticsStr = string.Format(
 @"The average zeros: {0}
 The average ones: {1}
 Number of numbers that are power of 2: {2}
@@ -154,7 +153,7 @@ Max is: {4}, Min is: {5}",
                  maxBinaryNumber,
                  minBinaryNumber);
 
-            Console.WriteLine(msg);
+            Console.WriteLine(statisticsStr);
         }
 
         public enum eBinaryDigit
