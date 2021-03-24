@@ -16,6 +16,7 @@ namespace B21_Ex01_2
 
             if (i_Size <= 0)
             {
+                // return an error to the user
                 outputStrBuilder.Append("Size has to be positive number.");
             }
             else
