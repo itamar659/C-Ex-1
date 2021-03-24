@@ -11,8 +11,8 @@ namespace B21_Ex01_4
             
             string inputStr = getUserInput();
 
-            bool isUserInputStrPolindrom = isPolindrom(new StringBuilder(inputStr));
-            Console.WriteLine(string.Format("The string {0} polindrom", isUserInputStrPolindrom ? "is" : "isn't"));
+            bool isUserInputStrPalindrome = isPalindrome(new StringBuilder(inputStr));
+            Console.WriteLine(string.Format("The string {0} palindrome", isUserInputStrPalindrome ? "is" : "isn't"));
 
             if (int.TryParse(inputStr, out int inputStrAsInteger))
             {
@@ -80,35 +80,28 @@ namespace B21_Ex01_4
             return isInputString;
         }
 
-        private static bool isPolindrom(StringBuilder i_Str)
+        private static bool isPalindrome(StringBuilder i_Str)
         {
-            bool isPoli = false;
+            bool isPalindromeBool = false;
             int strLength = i_Str.Length;
 
             if (strLength <= 1)
             {
-                isPoli = true;
+                    isPalindromeBool = true;
             }
             else if (i_Str[0] == i_Str[strLength - 1])
             {
                 i_Str.Remove(strLength - 1, 1);
                 i_Str.Remove(0, 1);
-                isPoli = isPolindrom(i_Str);
+                    isPalindromeBool = isPalindrome(i_Str);
             }
 
-            return isPoli;
+            return isPalindromeBool;
         }
 
         private static bool isNumberDivisible(int i_Number, int i_Divider)
         {
-            bool isDivisible = false;
-
-            if (i_Number % i_Divider == 0)
-            {
-                isDivisible = true;
-            }
-
-            return isDivisible;
+            return i_Number % i_Divider == 0;
         }
 
         private static int countUpperCase(string i_Str)

@@ -28,20 +28,20 @@ namespace B21_Ex01_6
           {
                string numString = i_Number.ToString();
                
-               string msg = String.Format(
+               string messageOfStatistics = String.Format(
 @"Biggest Digit in {0} is: {1}
 Smallest Digit in {2} is: {3} 
 Number of digits that divide by {4} is: {5} 
 Number of digits that are bigger than {6} is: {7}",
                i_Number, getBiggestDigit(i_Number),
                i_Number, getSmallestDigit(i_Number),
-               3, getNumOfDigitsThatDivideByN(i_Number, 3),
-               char.Parse(numString.Substring(numString.Length - 1)) - '0', getNumOfDigitsBiggerThanDigit(numString.Length - 1, i_Number));
+               3, getNumOfDigitsThatDivisibleByN(i_Number, 3),
+               char.Parse(numString.Substring(numString.Length - 1)) - '0', getNumberOfDigitsBiggerThanDigit(numString.Length - 1, i_Number));
 
-               Console.WriteLine(msg);
+               Console.WriteLine(messageOfStatistics);
           }
           
-          private static int getNumOfDigitsBiggerThanDigit(int i_DigitIndex, int i_Number) 
+          private static int getNumberOfDigitsBiggerThanDigit(int i_DigitIndex, int i_Number) 
           {
                int validDigits = 0;
 
@@ -63,28 +63,28 @@ Number of digits that are bigger than {6} is: {7}",
                return validDigits;
           }
 
-          private static bool isDigitDivideByN(int i_Digit, int i_N)
+          private static bool isDigitDivisibleByN(int i_Digit, int i_N)
           {
-               bool isDivide = i_Digit % i_N == 0;
+               bool isDivisible = i_Digit % i_N == 0;
                
-               return isDivide;
+               return isDivisible;
           }
 
-          private static int getNumOfDigitsThatDivideByN(int i_Number, int i_N)
+          private static int getNumOfDigitsThatDivisibleByN(int i_Number, int i_N)
           {
-               int validDigits = 0;
+               int numOfDivisibleDigits = 0;
 
                string numberString = i_Number.ToString();
 
                for(int i = 0; i < numberString.Length; i++)
                {
-                    if(isDigitDivideByN(numberString[i], i_N))
+                    if(isDigitDivisibleByN(numberString[i], i_N))
                     {
-                         validDigits++;
+                         numOfDivisibleDigits++;
                     }
                }
 
-               return validDigits;
+               return numOfDivisibleDigits;
           }
 
           private static int getSmallestDigit(int i_Number)
