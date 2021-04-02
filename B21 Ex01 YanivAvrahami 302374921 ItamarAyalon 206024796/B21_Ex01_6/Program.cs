@@ -10,11 +10,7 @@ namespace B21_Ex01_6
 
             string userInputStr = Console.ReadLine();
 
-            const int k_NumberLength = 6;
-
-            if (userInputStr != null && 
-                userInputStr.Length == k_NumberLength && 
-                int.TryParse(userInputStr, out int number) && number > 0)
+            if (isValidInput(userInputStr, out int number))
             {
                 printStatisticsOnNumber(number);
             }
@@ -23,9 +19,26 @@ namespace B21_Ex01_6
                 Console.WriteLine("Error: Invalid Input");
             }
         }
+
+        private static bool isValidInput(string i_UserInputStr, out int o_StringAsNumber)
+        {
+            const int k_NumberLength = 6;
+            o_StringAsNumber = 0;
+
+            if (i_UserInputStr != null && i_UserInputStr.Length == k_NumberLength)
+            {
+                if (int.TryParse(i_UserInputStr, out int number))
+                {
+                    o_StringAsNumber = number;
+                }
+            }
+
+            return o_StringAsNumber > 0;
+        }
         
         private static void printStatisticsOnNumber(int i_Number)
         {
+            const int k_DivisionNumber = 3;
             string numString = i_Number.ToString();
 
             string messageOfStatistics = String.Format(
@@ -35,8 +48,9 @@ Number of digits that divide by {4} is: {5}
 Number of digits that are bigger than {6} is: {7}",
             i_Number, getBiggestDigit(i_Number),
             i_Number, getSmallestDigit(i_Number),
-            3, getNumOfDigitsThatDivisibleByN(i_Number, 3),
-            char.Parse(numString.Substring(numString.Length - 1)) - '0', getNumberOfDigitsBiggerThanDigit(numString.Length - 1, i_Number));
+            k_DivisionNumber, getNumOfDigitsThatDivisibleByN(i_Number, k_DivisionNumber),
+            char.Parse(numString.Substring(numString.Length - 1)) - '0',
+            getNumberOfDigitsBiggerThanDigit(numString.Length - 1, i_Number));
 
             Console.WriteLine(messageOfStatistics);
         }
