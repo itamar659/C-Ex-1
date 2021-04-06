@@ -9,16 +9,17 @@ namespace B21_Ex01_1
         {
             const int k_NumOfRequests = 3;
 
-            Console.WriteLine("Please enter a binary number with 7 digits:");
+            Console.WriteLine($"Please enter {k_NumOfRequests} binary numbers with 7 digits:");
             string[] binaryArr = getNBinaryNumbersFromUser(k_NumOfRequests);
 
             Console.Write("The numbers you entered in decimal: ");
-            printBinaryAsDecimalNumbers(binaryArr);
-            printStatisticsOnBinaryNumbers(binaryArr);
+            printBinaryNumberArrInDecimal(binaryArr);
+            printBinaryNumberArrStatistics(binaryArr);
+
             Console.WriteLine();
         }
 
-        private static void printBinaryAsDecimalNumbers(string[] i_BinaryNumbers)
+        private static void printBinaryNumberArrInDecimal(string[] i_BinaryNumbers)
         {
             int[] decimalArr = parseToDecimalArr(i_BinaryNumbers);
 
@@ -72,14 +73,14 @@ namespace B21_Ex01_1
 
         private static bool isOnlyOnesAndZeros(string i_Str)
         {
-            const bool v_isContainOnesZeros = true;
-            bool isValidBinaryNumber = v_isContainOnesZeros;
+            const bool v_IsContainOnesZeros = true;
+            bool isValidBinaryNumber = v_IsContainOnesZeros;
 
             foreach (char currentCharInString in i_Str)
             {
                 if (currentCharInString != '0' && currentCharInString != '1')
                 {
-                    isValidBinaryNumber = !v_isContainOnesZeros;
+                    isValidBinaryNumber = !v_IsContainOnesZeros;
                     break;
                 }
             }
@@ -112,26 +113,26 @@ namespace B21_Ex01_1
             return decimalArr;
         }
 
-        private static int convertBinaryToDecimal(string i_BinerNumber)
+        private static int convertBinaryToDecimal(string i_BinaryNumber)
         {
             int decimalNumber = 0;
 
-            for (int i = 0; i < i_BinerNumber.Length; i++)
+            for (int i = 0; i < i_BinaryNumber.Length; i++)
             {
-                decimalNumber += getDigitFromBinary(i_BinerNumber, i_BinerNumber.Length - i - 1) * (int)Math.Pow(2, i);
+                decimalNumber += getDigitFromBinary(i_BinaryNumber, i_BinaryNumber.Length - i - 1) * (int)Math.Pow(2, i);
             }
 
             return decimalNumber;
         }
 
-        private static int getDigitFromBinary(string i_BinerNumber, int i_IndexInBinaryNumber)
+        private static int getDigitFromBinary(string i_BinaryNumber, int i_IndexInBinaryNumber)
         {
-            int binaryDigit = i_BinerNumber[i_IndexInBinaryNumber] - '0';
+            int binaryDigit = i_BinaryNumber[i_IndexInBinaryNumber] - '0';
 
             return binaryDigit;
         }
 
-        private static void printStatisticsOnBinaryNumbers(string[] i_BinaryNumberArr)
+        private static void printBinaryNumberArrStatistics(string[] i_BinaryNumberArr)
         {
             float avgOfZeros = getAvgOfZerosInBinaryNumbers(i_BinaryNumberArr);
             float avgOfOnes = getAvgOfOnesInBinaryNumbers(i_BinaryNumberArr);
