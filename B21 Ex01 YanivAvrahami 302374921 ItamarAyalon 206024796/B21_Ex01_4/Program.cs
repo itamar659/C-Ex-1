@@ -7,39 +7,41 @@ namespace B21_Ex01_4
     {
         public static void Main()
         {
-            const int k_divider = 4;
-            
-            string inputStr = getUserInput();
+            const int k_Divider = 4;
 
+            string inputStr = getUserInput();
             bool isUserInputStrPalindrome = isPalindrome(new StringBuilder(inputStr));
+
             Console.WriteLine(string.Format("The string {0} palindrome", isUserInputStrPalindrome ? "is" : "isn't"));
 
-            if (int.TryParse(inputStr, out int inputStrAsInteger))
+            if (float.TryParse(inputStr, out float inputStrAsInteger))
             {
-                bool isDivisibleByDivider = isNumberDivisible(inputStrAsInteger, k_divider);
-                Console.WriteLine(string.Format("The number {0} be divided by {1}", isDivisibleByDivider ? "can" : "can not", k_divider));
+                bool isDivisibleByDivider = inputStrAsInteger % k_Divider == 0;
+
+                Console.WriteLine(string.Format("The number {0} be divided by {1}", isDivisibleByDivider ? "can" : "can not", k_Divider));
             }
 
             if (isStringContainLettersOnly(inputStr))
             {
                 int uppercaseLettersInStr = countUpperCase(inputStr);
+
                 Console.WriteLine(string.Format("The number has {0} uppercase letters", uppercaseLettersInStr));
             }
         }
 
         private static string getUserInput()
         {
-            const int k_stringSize = 10;
+            const int k_StringSize = 10;
             string inputStr = "";
             bool isValidInput = false;
 
-            Console.WriteLine(string.Format("Please Enter a string with {0} characters:", k_stringSize));
+            Console.WriteLine(string.Format("Please Enter a string with {0} characters:", k_StringSize));
             Console.WriteLine("The string need to contain only letters or only numbers.");
 
             while (!isValidInput)
             {
                 inputStr = Console.ReadLine();
-                isValidInput = isValidString(inputStr) && inputStr.Length == k_stringSize;
+                isValidInput = isValidString(inputStr) && inputStr.Length == k_StringSize;
                 if (!isValidInput)
                 {
                     Console.WriteLine("Something went wrong. Please try again.");
@@ -64,13 +66,13 @@ namespace B21_Ex01_4
             return isStringContainRangeASCIIValues(i_Str, '0', '9');
         }
 
-        private static bool isStringContainRangeASCIIValues(string i_Str, char i_Min, char i_Max)
+        private static bool isStringContainRangeASCIIValues(string i_Str, char i_MinASCIIValue, char i_MaxASCIIValue)
         {
             bool isInputString = true;
 
             foreach (char currentCharInStr in i_Str)
             {
-                if (!(i_Min <= currentCharInStr && currentCharInStr <= i_Max))
+                if (!(i_MinASCIIValue <= currentCharInStr && currentCharInStr <= i_MaxASCIIValue))
                 {
                     isInputString = false;
                     break;
@@ -87,21 +89,16 @@ namespace B21_Ex01_4
 
             if (strLength <= 1)
             {
-                    isPalindromeBool = true;
+                isPalindromeBool = true;
             }
             else if (i_Str[0] == i_Str[strLength - 1])
             {
                 i_Str.Remove(strLength - 1, 1);
                 i_Str.Remove(0, 1);
-                    isPalindromeBool = isPalindrome(i_Str);
+                isPalindromeBool = isPalindrome(i_Str);
             }
 
             return isPalindromeBool;
-        }
-
-        private static bool isNumberDivisible(int i_Number, int i_Divider)
-        {
-            return i_Number % i_Divider == 0;
         }
 
         private static int countUpperCase(string i_Str)
