@@ -31,22 +31,17 @@ namespace B21_Ex01_2
         private static string getHourGlassRec(uint i_Size, uint i_StartFrom = 0)
         {
             StringBuilder hourGlassStr = new StringBuilder();
+            string lineOfSizeStars = createNStars(i_Size, i_StartFrom);
 
-            if (i_Size <= 2)
+            if (i_Size > 2)
             {
-                string lineOfSizeStars = createNStars(i_Size, i_StartFrom);
-
-                hourGlassStr.AppendLine(lineOfSizeStars);
-            }
-            else
-            {
-                string lineOfSizeStars = createNStars(i_Size, i_StartFrom);
                 string smallHourGlass = getHourGlassRec(i_Size - 2, i_StartFrom + 1);
 
                 hourGlassStr.AppendLine(lineOfSizeStars);
                 hourGlassStr.Append(smallHourGlass);
-                hourGlassStr.AppendLine(lineOfSizeStars);
             }
+
+            hourGlassStr.AppendLine(lineOfSizeStars);
 
             return hourGlassStr.ToString();
         }
